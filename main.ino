@@ -86,7 +86,7 @@ unsigned long lastToneTime = 0;
 // -----------------------
 const char *ssid = "qrr";
 const char *password = "abcabcabc";
-#define BOTtoken "8327968609:AAHG9WC2IbOO8lStQZgFSZxr2e5h-GkKqtc"
+#define BOTtoken "HERE"
 const String adminChatID = "1879407547";
 
 WiFiClientSecure client;
