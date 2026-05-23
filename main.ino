@@ -54,7 +54,6 @@ volatile int currentSpeed = 80;
 volatile int MIDSpeed = 40;
 volatile int HIGHSpeed = 0;
 
-
 // Sensor & Timing State
 volatile bool startTriggered = false;
 volatile bool timingActive = false;
@@ -84,10 +83,10 @@ unsigned long lastToneTime = 0;
 // -----------------------
 // Telegram Credentials & Objects
 // -----------------------
-const char *ssid = "qrr";
-const char *password = "abcabcabc";
+const char *ssid = "NAME";
+const char *password = "PASS";
 #define BOTtoken "HERE"
-const String adminChatID = "1879407547";
+const String adminChatID = "ID";
 
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);
@@ -306,16 +305,19 @@ void handleBuzzerAsync()
     if (millis() - lastToneTime > 350)
     { // 150ms play + 200ms gap
       currentToneIndex++;
-      
+
       // If we reach the end of the tone array
       if (currentToneIndex >= 6)
       {
         // Loop the buzzer if we are still in HIGH_ALERT
-        if (currentMode == HIGH_ALERT) {
+        if (currentMode == HIGH_ALERT)
+        {
           currentToneIndex = 0;
           tone(buzzerPin, buzzerTones[0], 150);
           lastToneTime = millis();
-        } else {
+        }
+        else
+        {
           // Otherwise, stop it
           noTone(buzzerPin);
           currentToneIndex = -1; // Sequence finished
@@ -338,15 +340,15 @@ void triggerNormalState()
 {
   currentMode = NORMAL;
   currentSpeed = 80;
-  
+
   digitalWrite(gTL, HIGH);
   digitalWrite(yTL, LOW);
   digitalWrite(rTL, LOW);
-  
+
   // Force stop the buzzer and reset the sequence tracker
   noTone(buzzerPin);
-  currentToneIndex = -1; 
-  
+  currentToneIndex = -1;
+
   updateLCD();
 }
 
